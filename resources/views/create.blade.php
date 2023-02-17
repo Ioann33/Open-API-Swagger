@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="alert-danger  error-window" style="width: 300px; display: none; margin: 50px auto 0; padding: 20px"></div>
     <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0" style="margin-top: 100px">
         <div class="row bg-white shadow-sm">
             <div class="col border rounded p-4">
