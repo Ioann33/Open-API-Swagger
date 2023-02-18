@@ -4,8 +4,8 @@ let content = document.querySelector('.main-div')
 export default function showCreateForm(){
     content.innerHTML = ''
     content.innerHTML = `
-        <div class="alert-danger  error-window" style="width: 300px; display: none; margin: 50px auto 0; padding: 20px"></div>
-        <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0" style="margin-top: 100px">
+        <div class="alert alert-danger error-window" style="width: 500px; display: none; margin: 50px auto 0; padding: 10px"></div>
+        <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0" style="margin-top: 50px">
             <div class="row bg-white shadow-sm">
                 <div class="col border rounded p-4">
                     <h3 class="text-center mb-4">Create User</h3>
@@ -24,11 +24,11 @@ export default function showCreateForm(){
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputConfirm">Password Confirm</label>
-                            <input type="password" class="form-control" id="exampleInputConfirm" name="passConf">
+                            <input type="password" class="form-control" id="exampleInputConfirm" name="password_confirmation">
                         </div>
                         <button type="submit" class="btn btn-primary w-100 mt-2">Save</button>
                     </form>
@@ -42,13 +42,22 @@ export default function showCreateForm(){
         fetch('/api/user', {
             method: 'POST',
             body: formData,
-            // headers: {
-            //     'Content-Type': 'multipart/form-data'
-            // }
-        }).then(res => res.json())
-            .then(res => {
-                console.log(res)
-            })
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(res => {
+            if (res.status === 422){
+                res.json().then(error => {
+                    let errorMess = document.querySelector('.error-window')
+                    errorMess.innerText = error.message
+                    errorMess.style.display = 'block'
+                })
+            }else if (res.status === 204){
+                getUsers()
+            }
+
+        })
+
         e.preventDefault()
     }
 
