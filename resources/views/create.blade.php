@@ -6,18 +6,18 @@
         <div class="row bg-white shadow-sm">
             <div class="col border rounded p-4">
                 <h3 class="text-center mb-4">Create User</h3>
-                <form style="width: 300px" class="create-form">
+                <form style="width: 500px" class="create-form" method="POST" action="" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputUname">Name</label>
                         <input type="text" class="form-control" id="exampleInputUname" aria-describedby="emailHelp" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputLUname">Last name</label>
-                        <input type="text" class="form-control" id="exampleInputLUname" aria-describedby="emailHelp" name="l_name" required>
-                    </div>
-                    <div class="form-group">
                         <label for="exampleInputEmail">Email</label>
                         <input type="text" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Photo</label>
+                        <input type="file" class="form-control" id="photo" aria-describedby="emailHelp" name="photo" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>

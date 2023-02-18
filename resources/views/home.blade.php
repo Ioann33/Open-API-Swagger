@@ -5,7 +5,6 @@
         <div class="row row-cols-2 row-cols-lg-3">
             @foreach($users as $user)
                 <div class="col">
-
                     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                             <div class="card mb-3" style="max-width: 540px;">
@@ -23,7 +22,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             @endforeach
         </div>
