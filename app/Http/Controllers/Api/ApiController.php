@@ -16,4 +16,9 @@ class ApiController extends Controller
 
         return response()->json($users);
     }
+
+    public function save(Request $request)
+    {
+        return response()->json($request->photo);
+    }
 }
