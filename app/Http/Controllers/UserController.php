@@ -11,16 +11,6 @@ class UserController extends Controller
     {
         $perPage = $request->perPage ?? 6;
         $users = User::query()->orderBy('created_at', 'desc')->limit($perPage)->get();
-        return view('home', ['users' => $users]);
-    }
-
-    public function create()
-    {
-        return view('create');
-    }
-
-    public function save()
-    {
-
+        return view('layouts.app', ['users' => $users]);
     }
 }
