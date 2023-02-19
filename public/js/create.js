@@ -46,7 +46,7 @@ export default function showCreateForm(){
                 'Accept': 'application/json'
             }
         }).then(res => {
-            if (res.status === 422){
+            if (res.status === 422 || res.status === 500){
                 res.json().then(error => {
                     let errorMess = document.querySelector('.error-window')
                     errorMess.innerText = error.message

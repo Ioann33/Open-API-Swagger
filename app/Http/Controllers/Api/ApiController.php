@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\PhotoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -31,21 +32,11 @@ class ApiController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $path = 'storage/'.$request->file('photo')->store('origin', 'public');
-        Tinify::setKey('9vknXbc3fVnGFy1sTYJ6qr3R7gV7rdYV');
-        $path_info = pathinfo($path);
-        $res_pass = "storage/photos/{$path_info['filename']}.jpg";
-        $source = Source::fromFile($path)->convert(["type"=>"image/jpg"]);
-        $source->resize([
-            "method" => "fit",
-            "width" => 70,
-            "height" => 70
-        ])->toFile($res_pass);
-        unlink($path);
+        $pass = PhotoService::optimize($request, 'fit', 70, 70);
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'photo' => $res_pass,
+            'photo' => $pass,
             'password' => Hash::make($request->password),
         ]);
         return response()->json([], 204);
