@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('/token', [ApiController::class, 'getApiToken']);
 Route::get('/users', [ApiController::class, 'getUsers']);
-Route::post('/user', [ApiController::class, 'save']);
+Route::middleware('auth_api')->post('/user', [ApiController::class, 'save']);

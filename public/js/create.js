@@ -1,4 +1,5 @@
 import getUsers from "./show";
+import getApiToken from "./auth";
 let content = document.querySelector('.main-div')
 
 export default function showCreateForm(){
@@ -38,25 +39,31 @@ export default function showCreateForm(){
     `;
     let form = document.querySelector('.create-form')
     form.onsubmit = function (e) {
-        let formData = new FormData(form)
-        fetch('/api/user', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(res => {
-            if (res.status === 422 || res.status === 500){
-                res.json().then(error => {
-                    let errorMess = document.querySelector('.error-window')
-                    errorMess.innerText = error.message
-                    errorMess.style.display = 'block'
-                })
-            }else if (res.status === 204){
-                getUsers()
-            }
+        let token = getApiToken()
+        token.then(res => {
+            let formData = new FormData(form)
+            fetch('/api/user', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer '+res
+                }
+            }).then(res => {
+                if (res.status === 422 || res.status === 500 || res.status === 401){
+                    res.json().then(error => {
+                        let errorMess = document.querySelector('.error-window')
+                        errorMess.innerText = error.message
+                        errorMess.style.display = 'block'
+                    })
+                }else if (res.status === 204){
+                    getUsers()
+                }
 
+            })
         })
+
+
 
         e.preventDefault()
     }

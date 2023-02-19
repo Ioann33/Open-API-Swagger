@@ -8,9 +8,6 @@ use App\Services\PhotoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Tinify\Source;
-use Tinify\Tinify;
 
 class ApiController extends Controller
 {
@@ -22,7 +19,7 @@ class ApiController extends Controller
         return response()->json($users);
     }
 
-    public function save(Request $request)
+    public function save(Request $request): JsonResponse
     {
 
         $this->validate($request, [
@@ -32,6 +29,7 @@ class ApiController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
+        // $method это метод по работе с изображением;
         $pass = PhotoService::optimize($request, 'fit', 70, 70);
         User::create([
             'name' => $request->name,
@@ -40,5 +38,10 @@ class ApiController extends Controller
             'password' => Hash::make($request->password),
         ]);
         return response()->json([], 204);
+    }
+
+    public function getApiToken()
+    {
+        return config('apitokens')[0];
     }
 }
