@@ -44,12 +44,92 @@
                         "description": "server error"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create new user",
+                "operationId": "createUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "200": {
+                        "description": "answer",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "204": {
+                        "description": "sucess"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
             }
         }
     },
     "components": {
+        "schemas": {
+            "UserStoreRequest": {
+                "title": "User storring request",
+                "description": "User model",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Some text field",
+                        "type": "string",
+                        "format": "string",
+                        "example": "test"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "Some email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "test@gmail.com"
+                    },
+                    "photo": {
+                        "title": "Photo",
+                        "description": "Some photo",
+                        "format": "mimes"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Some pass",
+                        "type": "string",
+                        "format": "string",
+                        "example": "123445EE"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
-            "Bearer defrfgiuhdwiquhgdiuwe324fem3kmerf": {
+            "token": {
                 "type": "apiKey",
                 "name": "Authorization",
                 "in": "header"

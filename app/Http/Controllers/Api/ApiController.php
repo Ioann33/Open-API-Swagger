@@ -30,10 +30,10 @@ use Illuminate\Support\Facades\Hash;
  *     url="http://127.0.0.1:8000/api"
  * ),
  * @OA\SecurityScheme(
- *     type="apiKey",
- *     in="header",
- *     name="Authorization",
- *     securityScheme="Bearer defrfgiuhdwiquhgdiuwe324fem3kmerf"
+ *      securityScheme="token",
+ *      type="apiKey",
+ *      name="Authorization",
+ *      in="header"
  * )
  */
 class ApiController extends Controller
@@ -73,6 +73,47 @@ class ApiController extends Controller
         return response()->json($users);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/users",
+     *     operationId="createUser",
+     *     tags={"User"},
+     *     summary="Create new user",
+     *      security={{"token": {}}},
+     *     @OA\Response(
+     *          response="401",
+     *          description="Unauthenticated",
+     *           @OA\MediaType(
+     *              mediaType="application/json"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="Unprocessable Content",
+     *           @OA\MediaType(
+     *              mediaType="application/json"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="answer",
+     *           @OA\MediaType(
+     *              mediaType="application/json"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response="204",
+     *          description="sucess",
+     *     ),
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/UserStoreRequest")
+     *      )
+     * )
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function save(Request $request): JsonResponse
     {
 

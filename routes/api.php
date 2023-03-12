@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/token', [ApiController::class, 'getApiToken']);
 Route::get('/users', [ApiController::class, 'getUsers']);
-Route::middleware('auth_api')->post('/user', [ApiController::class, 'save']);
+Route::middleware('auth_api')->post('/users', [ApiController::class, 'save']);
