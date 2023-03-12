@@ -1,0 +1,65 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api Documentation",
+        "contact": {
+            "email": "ivan@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "Api Documentation"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get All users with count per page",
+                "operationId": "usersAll",
+                "parameters": [
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "description": "The number item per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "status ok"
+                    },
+                    "500": {
+                        "description": "server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "Bearer defrfgiuhdwiquhgdiuwe324fem3kmerf": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "You can add and see users here"
+        }
+    ]
+}
