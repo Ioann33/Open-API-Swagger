@@ -42,7 +42,7 @@ export default function showCreateForm(){
         let token = getApiToken()
         token.then(res => {
             let formData = new FormData(form)
-            fetch('/api/user', {
+            fetch('/api/users', {
                 method: 'POST',
                 body: formData,
                 headers: {

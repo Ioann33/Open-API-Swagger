@@ -54,9 +54,40 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserStoreRequest"
+                                "properties": {
+                                    "name": {
+                                        "title": "name",
+                                        "description": "Some text field",
+                                        "type": "string",
+                                        "example": "test"
+                                    },
+                                    "email": {
+                                        "title": "email",
+                                        "description": "Some email",
+                                        "type": "string",
+                                        "example": "email@gmail.com"
+                                    },
+                                    "photo": {
+                                        "title": "photo",
+                                        "description": "Some photo",
+                                        "type": "file"
+                                    },
+                                    "password": {
+                                        "title": "password",
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "12345678"
+                                    },
+                                    "password_confirmation": {
+                                        "title": "password_confirmation",
+                                        "description": "password_confirmation",
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -115,14 +146,15 @@
                     "photo": {
                         "title": "Photo",
                         "description": "Some photo",
-                        "format": "mimes"
+                        "format": "string",
+                        "default": "https://via.placeholder.com/70x70.png/004411?text=labore"
                     },
                     "password": {
                         "title": "Password",
                         "description": "Some pass",
                         "type": "string",
                         "format": "string",
-                        "example": "123445EE"
+                        "example": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
                     }
                 },
                 "type": "object"

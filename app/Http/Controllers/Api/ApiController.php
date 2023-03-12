@@ -107,7 +107,47 @@ class ApiController extends Controller
      *     ),
      *     @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/UserStoreRequest")
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *
+     *                 @OA\Property(
+     *                      property="name",
+     *                      title="name",
+     *                      description="Some text field",
+     *                      type="string",
+     *                      example="test",
+     *                 ),
+     *                  @OA\Property(
+     *                      property="email",
+     *                      title="email",
+     *                      description="Some email",
+     *                      type="string",
+     *                      example="email@gmail.com",
+     *                 ),
+     *                  @OA\Property(
+     *                      property="photo",
+     *                      title="photo",
+     *                      description="Some photo",
+     *                      type="file",
+     *
+     *                 ),
+     *                   @OA\Property(
+     *                      property="password",
+     *                      title="password",
+     *                      description="password",
+     *                      type="string",
+     *                      example="12345678",
+     *                 ),
+     *                  @OA\Property(
+     *                      property="password_confirmation",
+     *                      title="password_confirmation",
+     *                      description="password_confirmation",
+     *                      type="string",
+     *                      example="12345678",
+     *                 ),
+     *             )
+     *         )
      *      )
      * )
      * @param Request $request

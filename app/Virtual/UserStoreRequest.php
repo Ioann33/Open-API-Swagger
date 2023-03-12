@@ -37,7 +37,8 @@ class UserStoreRequest
      * @OA\Property(
      *     title="Photo",
      *     description="Some photo",
-     *     format="mimes",
+     *     default="https://via.placeholder.com/70x70.png/004411?text=labore",
+     *     format="string",
      *
      * )
      *
@@ -48,8 +49,9 @@ class UserStoreRequest
      * @OA\Property(
      *     title="Password",
      *     description="Some pass",
+     *
      *     format="string",
-     *     example="123445EE",
+     *     example="$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
      * )
      *
      * @var string
