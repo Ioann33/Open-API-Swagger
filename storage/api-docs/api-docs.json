@@ -121,6 +121,26 @@
                     }
                 ]
             }
+        },
+        "/token": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Give api token",
+                "operationId": "getApiToken",
+                "responses": {
+                    "200": {
+                        "description": "status ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "500": {
+                        "description": "server error"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -163,6 +183,7 @@
         "securitySchemes": {
             "token": {
                 "type": "apiKey",
+                "description": "(Bearer defrfgiuhdwiquhgdiuwe324fem3kmerf)",
                 "name": "Authorization",
                 "in": "header"
             }

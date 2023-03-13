@@ -33,7 +33,8 @@ use Illuminate\Support\Facades\Hash;
  *      securityScheme="token",
  *      type="apiKey",
  *      name="Authorization",
- *      in="header"
+ *      in="header",
+ *      description="(Bearer defrfgiuhdwiquhgdiuwe324fem3kmerf)"
  * )
  */
 class ApiController extends Controller
@@ -167,14 +168,34 @@ class ApiController extends Controller
         // $method это метод по работе с изображением;
         $pass = PhotoService::optimize($request, 'fit', 70, 70);
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
             'photo' => $pass,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->get('password')),
         ]);
         return response()->json([], 204);
     }
 
+    /**
+     * @return mixed
+     *  @OA\Get(
+     *  path="/token",
+     *  operationId="getApiToken",
+     *  tags={"User"},
+     *  summary="Give api token",
+     *  @OA\Response(
+     *     response="200",
+     *     description="status ok",
+     *     @OA\MediaType(
+     *              mediaType="application/json"
+     *     ),
+     * ),
+     *  @OA\Response(
+     *     response="500",
+     *     description="server error",
+     * ),
+     *)
+     */
     public function getApiToken()
     {
         return config('apitokens')[0];
